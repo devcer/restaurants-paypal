@@ -296,7 +296,7 @@
       visibility: hidden;
     }
   }
-  table {
+  mat-table {
     width: 100%;
   }
 </style>
@@ -343,62 +343,62 @@
     <input matInput placeholder="Ex. Buffet 101" (keyup)="applyFilter($event, 'name')">
   </mat-form-field> -->
 
-  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+  <mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID.</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      <mat-header-cell *matHeaderCellDef>ID.</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="cuisines">
-      <th mat-header-cell *matHeaderCellDef>Cuisines</th>
-      <td mat-cell *matCellDef="let element">{{ element.cuisines }}</td>
+      <mat-header-cell *matHeaderCellDef>Cuisines</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.cuisines }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="avgCostForTwo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Average Cost for two</th>
-      <td mat-cell *matCellDef="let element">{{ element.avgCostForTwo }}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Average Cost for two</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.avgCostForTwo }}</mat-cell>
     </ng-container>
     <!-- <ng-container matColumnDef="cuisines">
-      <th mat-header-cell *matHeaderCellDef>Cuisines</th>
-      <td mat-cell *matCellDef="let element">{{ element.cuisines }}</td>
+      <mat-header-cell *matHeaderCellDef>Cuisines</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.cuisines }}</mat-cell>
     </ng-container> -->
     <ng-container matColumnDef="currency">
-      <th mat-header-cell *matHeaderCellDef>Currency</th>
-      <td mat-cell *matCellDef="let element">{{ element.currency }}</td>
+      <mat-header-cell *matHeaderCellDef>Currency</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.currency }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="hasTableBooking">
-      <th mat-header-cell *matHeaderCellDef>Has Table booking</th>
-      <td mat-cell *matCellDef="let element">{{ element.hasTableBooking }}</td>
+      <mat-header-cell *matHeaderCellDef>Has Table booking</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.hasTableBooking }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="hasOnlineDelivery">
-      <th mat-header-cell *matHeaderCellDef>Has Online delivery</th>
-      <td mat-cell *matCellDef="let element">{{ element.hasOnlineDelivery }}</td>
+      <mat-header-cell *matHeaderCellDef>Has Online delivery</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.hasOnlineDelivery }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="rating">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Aggregate rating</th>
-      <td mat-cell *matCellDef="let element">{{ element.rating }}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Aggregate rating</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.rating }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="ratingColor">
-      <th mat-header-cell *matHeaderCellDef>Rating color</th>
-      <td mat-cell *matCellDef="let element">{{ element.ratingColor }}</td>
+      <mat-header-cell *matHeaderCellDef>Rating color</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.ratingColor }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="ratingText">
-      <th mat-header-cell *matHeaderCellDef>Rating text</th>
-      <td mat-cell *matCellDef="let element">{{ element.ratingText }}</td>
+      <mat-header-cell *matHeaderCellDef>Rating text</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.ratingText }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="votes">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Votes</th>
-      <td mat-cell *matCellDef="let element">{{ element.votes }}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Votes</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.votes }}</mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
