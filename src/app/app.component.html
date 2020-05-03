@@ -299,6 +299,9 @@
   mat-table {
     width: 100%;
   }
+  mat-form-field {
+    margin: 10px;
+  }
 </style>
 
 <!-- Toolbar -->
@@ -334,15 +337,16 @@
 </div>
 
 <div class="content" role="main">
-  <mat-form-field class="example-full-width">
-    <mat-label>Filter by Cuisine</mat-label>
-    <input matInput placeholder="Ex. Pizza" (keyup)="applyFilter($event, 'cuisine')">
-  </mat-form-field>
-  <!-- <mat-form-field class="example-full-width">
-    <mat-label>Filter by Restaurant name</mat-label>
-    <input matInput placeholder="Ex. Buffet 101" (keyup)="applyFilter($event, 'name')">
-  </mat-form-field> -->
-
+  <form>
+    <mat-form-field class="example-full-width">
+      <mat-label>Filter by Cuisine</mat-label>
+      <input matInput placeholder="Ex. Pizza" [formControl]="cuisineFilter" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Filter by Restaurant name</mat-label>
+      <input matInput placeholder="Ex. Buffet 101" [formControl]="nameFilter" />
+    </mat-form-field>
+  </form>
   <mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -360,7 +364,9 @@
       <mat-cell *matCellDef="let element">{{ element.cuisines }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="avgCostForTwo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Average Cost for two</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Average Cost for two</mat-header-cell
+      >
       <mat-cell *matCellDef="let element">{{ element.avgCostForTwo }}</mat-cell>
     </ng-container>
     <!-- <ng-container matColumnDef="cuisines">
@@ -373,14 +379,20 @@
     </ng-container>
     <ng-container matColumnDef="hasTableBooking">
       <mat-header-cell *matHeaderCellDef>Has Table booking</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.hasTableBooking }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.hasTableBooking
+      }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="hasOnlineDelivery">
       <mat-header-cell *matHeaderCellDef>Has Online delivery</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.hasOnlineDelivery }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.hasOnlineDelivery
+      }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="rating">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Aggregate rating</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Aggregate rating</mat-header-cell
+      >
       <mat-cell *matCellDef="let element">{{ element.rating }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="ratingColor">

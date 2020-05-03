@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { restaurantData } from 'src/assets/data/restaurants';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
   name: string;
@@ -41,34 +42,65 @@ export class AppComponent implements OnInit {
     'rating',
     'ratingColor',
     'ratingText',
-    'votes'
+    'votes',
   ];
   cuisines = [];
   dataSource = new MatTableDataSource(restaurantData);
   filter = {
     cuisines: '',
-    // name: ''
+    name: '',
   };
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  cuisineFilter = new FormControl();
+  nameFilter = new FormControl();
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   ngOnInit() {
     this.dataSource.sort = this.sort;
-  }
-  applyCuisineFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  applyNameFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  applyFilter(event: Event, type: 'cuisine' | 'name') {
-    const filterValue = (event.target as HTMLInputElement).value;
-    // type === 'cuisine' ? this.filter.cuisines = filterValue : this.filter.name = filterValue;
-    this.filter.cuisines = filterValue
-    console.log(this.filter); 
-    // this.dataSource.filter = JSON.stringify(this.filter);
-    this.dataSource.filter = filterValue;
+    this.cuisineFilter.valueChanges.subscribe((positionFilterValue) => {
+      this.filter['cuisines'] = positionFilterValue;
+      console.log(this.filter);
+      this.dataSource.filter = JSON.stringify(this.filter);
+    });
 
+    this.nameFilter.valueChanges.subscribe((nameFilterValue) => {
+      this.filter['name'] = nameFilterValue;
+      console.log(this.filter);
+      this.dataSource.filter = JSON.stringify(this.filter);
+    });
+    this.dataSource.filterPredicate = this.customFilterPredicate();
+  }
+  // applyCuisineFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
+  // applyNameFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
+  // applyFilter(event: Event, type: 'cuisine' | 'name') {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   // type === 'cuisine' ? this.filter.cuisines = filterValue : this.filter.name = filterValue;
+  //   this.filter.cuisines = filterValue;
+  //   console.log(this.filter);
+  //   // this.dataSource.filter = JSON.stringify(this.filter);
+  //   this.dataSource.filter = filterValue;
+  // }
+  customFilterPredicate() {
+    const myFilterPredicate = function (data, filter: string): boolean {
+      let searchString = JSON.parse(filter);
+      return (
+        data.cuisines
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.cuisines.toLowerCase()) !== -1 &&
+        data.name
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.name.toLowerCase()) !== -1
+      );
+    };
+    return myFilterPredicate;
   }
 }
 
